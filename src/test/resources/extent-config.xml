@@ -1,0 +1,7 @@
+<extent-config>
+    <configuration>
+        <reportName>Cucumber Test Report</reportName>
+        <documentTitle>Test Execution Report</documentTitle>
+        <theme>standard</theme>
+    </configuration>
+</extent-config>
