@@ -1,5 +1,5 @@
 @dp_two
-Feature: DP One Scenarios
+Feature: DP Two Scenarios
 
 Background: 
 	Given User is on DP Two Home Page
