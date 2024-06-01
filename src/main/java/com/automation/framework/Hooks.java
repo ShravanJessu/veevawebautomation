@@ -18,29 +18,38 @@ public class Hooks {
     public void setUp() {
         String browser = System.getProperty("browser", "chrome"); // default to chrome if not specified
 
-        switch (browser.toLowerCase()) {
-		case "firefox":
-			driver = new FirefoxDriver();
-			break;
-		case "msedge":
-			driver = new EdgeDriver();
-			break;
-		case "safari":
-			driver = new SafariDriver();
-			break;
-		case "chrome":
-		default:
-			driver = new ChromeDriver();
-			break;
+        try {
+			switch (browser.toLowerCase()) {
+			case "firefox":
+				driver = new FirefoxDriver();
+				break;
+			case "msedge":
+				driver = new EdgeDriver();
+				break;
+			case "safari":
+				driver = new SafariDriver();
+				break;
+			case "chrome":
+			default:
+				driver = new ChromeDriver();
+				break;
+			}
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		} catch (Exception e) {
+			Logger.error("Failed to initialize WebDriver", e);
+			throw e;
 		}
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        
+        
     }
 
     @After
     public void tearDown() {
+    	Logger.info("Terminating the driver instance.");
         if (driver != null) {
             driver.quit();
+            Logger.info("Driver Instance terminated Successfully.");
         }
     }
 
