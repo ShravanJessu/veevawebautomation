@@ -4,6 +4,6 @@ Feature: DP Two Scenarios
 Background: 
 	Given User is on DP Two Home Page
 
-  Scenario: Get the list of available items
-    When User enters username as "user" and password as "pass"
-    Then User should be logged in
+  Scenario: Capture the list of available links from footer section
+    When User scolls to page footer section
+    Then User captures all availables links and stores in file

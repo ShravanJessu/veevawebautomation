@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = "src/test/resources/features/cp",
-        glue = {"com.core.product","com.automation.framework"},
+        glue = {"com.core.product","common"},
         plugin = {"pretty", "html:target/cucumber-reports.html"}
 )
 public class TestRunner_CP extends AbstractTestNGCucumberTests {

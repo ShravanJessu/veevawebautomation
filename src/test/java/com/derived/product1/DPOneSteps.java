@@ -9,8 +9,9 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-import com.automation.framework.common.Hooks;
 import com.automation.framework.cp.pages.LoginPage;
+
+import common.Hooks;
 
 public class DPOneSteps {
 	WebDriver driver = Hooks.getDriver();

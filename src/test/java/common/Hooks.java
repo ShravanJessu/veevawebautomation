@@ -1,4 +1,4 @@
-package com.automation.framework.common;
+package common;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -18,6 +18,7 @@ public class Hooks {
 
     @Before
     public void setUp() {
+    	Log4j2Util.info("Initializing the driver instance.");
         String browser = System.getProperty("browser", "chrome"); // default to chrome if not specified
 
         try {
@@ -38,6 +39,7 @@ public class Hooks {
 			}
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+			Log4j2Util.info(browser.toUpperCase()+" Driver Instance Initialization Completed Sucessfully.");
 		} catch (Exception e) {
 			Log4j2Util.error("Failed to initialize WebDriver", e);
 			throw e;

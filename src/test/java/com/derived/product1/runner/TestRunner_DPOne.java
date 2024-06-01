@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = "src/test/resources/features/dp_one",
-        glue = {"com.derived.product1","com.automation.framework"},
+        glue = {"com.derived.product1","common"},
         plugin = {"pretty", "html:target/cucumber-reports.html"}
 )
 public class TestRunner_DPOne extends AbstractTestNGCucumberTests {
