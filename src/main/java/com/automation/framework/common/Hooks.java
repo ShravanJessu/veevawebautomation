@@ -1,4 +1,4 @@
-package com.automation.framework;
+package com.automation.framework.common;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+
+import com.automation.framework.utils.Log4j2Util;
 
 public class Hooks {
     private static WebDriver driver;
@@ -37,7 +39,7 @@ public class Hooks {
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		} catch (Exception e) {
-			Logger.error("Failed to initialize WebDriver", e);
+			Log4j2Util.error("Failed to initialize WebDriver", e);
 			throw e;
 		}
         
@@ -46,10 +48,10 @@ public class Hooks {
 
     @After
     public void tearDown() {
-    	Logger.info("Terminating the driver instance.");
+    	Log4j2Util.info("Terminating the driver instance.");
         if (driver != null) {
             driver.quit();
-            Logger.info("Driver Instance terminated Successfully.");
+            Log4j2Util.info("Driver Instance terminated Successfully.");
         }
     }
 

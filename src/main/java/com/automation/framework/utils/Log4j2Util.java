@@ -1,10 +1,10 @@
-package com.automation.framework;
+package com.automation.framework.utils;
 
 import org.apache.logging.log4j.LogManager;
 
-public class Logger {
+public class Log4j2Util {
 
-	private static org.apache.logging.log4j.Logger logger = LogManager.getLogger(Logger.class);
+	private static org.apache.logging.log4j.Logger logger = LogManager.getLogger(Log4j2Util.class);
 	
 	public static void info(String message) {
 		logger.info(message);
