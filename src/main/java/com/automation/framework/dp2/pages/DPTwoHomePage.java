@@ -16,10 +16,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.automation.framework.utils.Log4j2Util;
 
-public class HomePage {
+public class DPTwoHomePage {
 
 	WebDriver driver;
-	static String DP_APP_URL = "https://www.nba.com/bulls/";
+	static String DP_TWO_APP_URL = "https://www.nba.com/bulls/";
 
 	@FindBy(xpath = "//footer[@class='text-xs text-white dark-primary-background print:hidden']")
 	WebElement footerElement;
@@ -27,13 +27,13 @@ public class HomePage {
 	@FindBy(xpath = "//footer[@class='text-xs text-white dark-primary-background print:hidden']//a[not(@href = following::a/@href)]")
 	List<WebElement> footerLinks;
 
-	public HomePage(WebDriver driver) {
+	public DPTwoHomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
 	public void navigateAppHomePage() {
-		driver.get(DP_APP_URL);
+		driver.get(DP_TWO_APP_URL);
 		if (((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete")) {
 			Log4j2Util.info("Page has loaded completely.");
 		} else {

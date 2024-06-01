@@ -5,5 +5,4 @@ Background:
 	Given User is on DP One Home Page
 
   Scenario: Get the list of available items
-    When User enters username as "user" and password as "pass"
-    Then User should be logged in
+    When User captures count of avaiables sildes from Tickets Menu

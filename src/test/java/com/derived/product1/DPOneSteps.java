@@ -8,30 +8,33 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.Assert;
 
 import com.automation.framework.cp.pages.LoginPage;
+import com.automation.framework.dp1.pages.DPOneHomePage;
+import com.automation.framework.dp2.pages.DPTwoHomePage;
 
 import common.Hooks;
 
 public class DPOneSteps {
 	WebDriver driver = Hooks.getDriver();
-	LoginPage loginPage;
-
+	DPOneHomePage dpOneHomePage ;
+	
 	@Given("User is on DP One Home Page")
 	public void homePage() {
-		driver.get("https://www.nba.com/sixers/");
-		loginPage = new LoginPage(driver);
+		dpOneHomePage = new DPOneHomePage(driver);
+		dpOneHomePage.navigateAppHomePage();
+		 // Assert that the page title contains a specific string
+		String expectedTitlePart = "Sixers - The official site of the NBA for the latest NBA Scores";
+        String actualTitle = dpOneHomePage.getPageTitle();
+        Assert.assertTrue(actualTitle.contains(expectedTitlePart), "Page title does not contain expected text.");
+	}
+	
+	
+	@When("User captures count of avaiables sildes from Tickets Menu")
+	public void captureSildesCount() {
+		dpOneHomePage.getSildesCountFromTicketMenu();
 	}
 
-	@When("User enters username as {string} and password as {string}")
-	public void user_enters_username_and_password(String username, String password) {
-//        loginPage.login(username, password);
-		System.out.println("browser title: "+ driver.getTitle());
-	}
-
-	@Then("User should be logged in")
-	public void user_should_be_logged_in() {
-		// Add validation code here
-		driver.quit();
-	}
+	
 }
