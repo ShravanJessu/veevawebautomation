@@ -53,7 +53,7 @@ The complete list of tools, you can see in the `pom.xml` file.
 │   │   │               ├───dp2
 │   │   │               │   └───pages            # DP2 Product Pages
 │   │   │               └───utils                # Common reusable methods
-│   │   └───resources
+│   │   └───resources                            # Log4j2 prop file stored 
 │   └───test
 │       ├───java
 │       │   ├───com
