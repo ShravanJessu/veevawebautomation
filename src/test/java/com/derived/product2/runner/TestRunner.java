@@ -1,5 +1,8 @@
 package com.derived.product2.runner;
 
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
@@ -9,4 +12,9 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"pretty", "html:target/cucumber-reports.html"}
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
+	@Parameters({"browser"})
+    @BeforeClass
+    public void setUp(String browser) {
+		System.setProperty("browserName", browser);
+    }
 }

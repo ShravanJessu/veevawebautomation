@@ -4,8 +4,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.Keys;
@@ -50,7 +52,7 @@ public class CPMensShopPage {
 
 	WebDriver driver;
 	CommonUtils commonUtils;
-	
+
 	public CPMensShopPage(WebDriver driver) {
 		this.driver = driver;
 		commonUtils = new CommonUtils(driver);
@@ -70,7 +72,8 @@ public class CPMensShopPage {
 	}
 
 	public List<WebElement> collectAllItems() {
-		String filePath = System.getProperty("user.dir") + "/src/test/resources/data/cp_product.txt";
+		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		String filePath = System.getProperty("user.dir") + "/src/test/resources/data/cp_product" + timeStamp + ".txt";
 		List<WebElement> allItems = new ArrayList<>();
 		try {
 			if (new File(filePath).exists()) {
@@ -105,8 +108,8 @@ public class CPMensShopPage {
 		try {
 			if (commonUtils.isPageLoadComplete()) {
 				Log4j2Util.info("Page has loaded completely.");
-			} 
-			searchBox.sendKeys("Jackets" , Keys.ENTER);
+			}
+			searchBox.sendKeys("Jackets", Keys.ENTER);
 		} catch (Exception e) {
 			driver.navigate().refresh();
 			if (commonUtils.isPageLoadComplete()) {
@@ -115,7 +118,7 @@ public class CPMensShopPage {
 				Log4j2Util.error("Page has not loaded completely after refreshing page in re try catch block.");
 				return;
 			}
-			searchBox.sendKeys("Jackets" , Keys.ENTER);
+			searchBox.sendKeys("Jackets", Keys.ENTER);
 		}
 	}
 

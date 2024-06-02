@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Cucumber DP One Tests" parallel = "tests" thread-count="1">
+<test name="Local Chrome TEST" enabled="true">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+                <class name="com.core.product.runner"/>
+        </classes>
+</test>
+<test name="Local MicrosoftEdge TEST" enabled="false">
+        <parameter name="browser" value="msedge"/>
+        <classes>
+                <class name="com.core.product.runner"/>
+        </classes>
+</test>
+<test name="Local Firefox TEST" enabled="false">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+                <class name="com.core.product.runner"/>
+        </classes>
+</test>
+</suite>

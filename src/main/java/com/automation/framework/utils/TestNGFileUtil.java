@@ -29,7 +29,7 @@ public class TestNGFileUtil {
 		StringBuilder xmlContent = new StringBuilder();
 		xmlContent.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 //		xmlContent.append("<!DOCTYPE suite SYSTEM \"http://testng.org/testng-1.0.dtd\">\n");
-		xmlContent.append("<suite name=\"Cucumber Tests\">\n");
+		xmlContent.append("<suite name=\"Cucumber Tests\" parallel=\"tests\" thread-count=\"1\">\n");
 
 		for (String browser : browsers) {
 			xmlContent.append("<test name=\"Local " + browser.toUpperCase() + " TEST\">\n");

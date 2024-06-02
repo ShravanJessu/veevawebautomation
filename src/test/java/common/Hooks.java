@@ -1,11 +1,5 @@
 package common;
 
-import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
-import io.cucumber.java.Scenario;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,11 +10,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.ITestContext;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
 
 import com.automation.framework.utils.Log4j2Util;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 
 public class Hooks {
     private static WebDriver driver;
@@ -28,7 +23,7 @@ public class Hooks {
     @Before
     public void setUp() {
     	Log4j2Util.info("Initializing the driver instance.");
-        String browser = System.getProperty("browser", "chrome"); // default to chrome if not specified
+        String browser = System.getProperty("browserName", "chrome"); // default to chrome if not specified
         try {
 			switch (browser.toLowerCase()) {
 			case "firefox":

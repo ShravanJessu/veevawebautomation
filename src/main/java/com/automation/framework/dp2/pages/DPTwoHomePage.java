@@ -3,7 +3,9 @@ package com.automation.framework.dp2.pages;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,9 +41,9 @@ public class DPTwoHomePage {
 		commonUtils.navigateToApp(DP_TWO_APP_URL);
 		commonUtils.isPageLoadComplete();
 	}
-	
+
 	public String getPageTitle() {
-		Log4j2Util.info("DP Two HomePage Title: " +  commonUtils.getPageTitle());
+		Log4j2Util.info("DP Two HomePage Title: " + commonUtils.getPageTitle());
 		return commonUtils.getPageTitle();
 	}
 
@@ -61,8 +63,9 @@ public class DPTwoHomePage {
 		Set<String> uniqueLinks = new HashSet<>();
 		List<String> duplicateLinks = new ArrayList<String>();
 		boolean duplicateLinksFound = false;
-
-		String csvFilePath = System.getProperty("user.dir") + "/src/test/resources/data/dp_two_footer_links.csv";
+		String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		String csvFilePath = System.getProperty("user.dir") + "/src/test/resources/data/dp_two_footer_links_"
+				+ timeStamp + ".csv";
 		File fileObj = new File(csvFilePath);
 		if (fileObj.exists()) {
 			fileObj.delete();
