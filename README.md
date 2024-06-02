@@ -20,7 +20,11 @@ The complete list of tools, you can see in the `pom.xml` file.
     $ mvn exec:java -Dbrowser="chrome" -DrunnerClass="com.derived.product1.runner.TestRunner"
     $ mvn test
     ```
-
+* Run the tests with chrome, msedge browsers use below
+    ```shell
+    $ mvn exec:java -Dbrowser="chrome,msedge" -DrunnerClass="com.derived.product1.runner.TestRunner"
+    $ mvn test
+    ```
 ## Test Results
 * Test report automatically generated on `target` folder after finished the test execution
 * Open cucumber-reports.html file on your browser from target/ folder
