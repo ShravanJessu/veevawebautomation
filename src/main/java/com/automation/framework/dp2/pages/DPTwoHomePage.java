@@ -14,11 +14,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.automation.framework.utils.CommonUtils;
 import com.automation.framework.utils.Log4j2Util;
 
 public class DPTwoHomePage {
 
 	WebDriver driver;
+	CommonUtils commonUtils;
 	static String DP_TWO_APP_URL = "https://www.nba.com/bulls/";
 
 	@FindBy(xpath = "//footer[@class='text-xs text-white dark-primary-background print:hidden']")
@@ -29,28 +31,23 @@ public class DPTwoHomePage {
 
 	public DPTwoHomePage(WebDriver driver) {
 		this.driver = driver;
+		commonUtils = new CommonUtils(driver);
 		PageFactory.initElements(driver, this);
 	}
 
 	public void navigateAppHomePage() {
-		driver.get(DP_TWO_APP_URL);
-		if (((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete")) {
-			Log4j2Util.info("Page has loaded completely.");
-		} else {
-			Log4j2Util.error("Page has not loaded completely.");
-			return;
-		}
+		commonUtils.navigateToApp(DP_TWO_APP_URL);
+		commonUtils.isPageLoadComplete();
 	}
 	
 	public String getPageTitle() {
-		String pageTitle = driver.getTitle();
-		Log4j2Util.info("DP Two HomePage Title: " + driver.getTitle());
-		return pageTitle;
+		Log4j2Util.info("DP Two HomePage Title: " +  commonUtils.getPageTitle());
+		return commonUtils.getPageTitle();
 	}
 
 	public void scrollToFooterSection() {
 		Log4j2Util.info("Scrolling to footer section.");
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", footerElement);
+		commonUtils.jseScroll(footerElement);
 		Log4j2Util.info("Successfully completed scrolling to footer section.");
 	}
 
@@ -66,12 +63,14 @@ public class DPTwoHomePage {
 		boolean duplicateLinksFound = false;
 
 		String csvFilePath = System.getProperty("user.dir") + "/src/test/resources/data/dp_two_footer_links.csv";
-		boolean fileExists = new File(csvFilePath).exists();
-		if (fileExists) {
-			new File(csvFilePath).delete();
+		File fileObj = new File(csvFilePath);
+		if (fileObj.exists()) {
+			fileObj.delete();
 		}
-		try (FileWriter csvWriter = new FileWriter(csvFilePath, true)) {
-			if (!fileExists) {
+		try {
+			fileObj.createNewFile();
+			FileWriter csvWriter = new FileWriter(csvFilePath, true);
+			if (!fileObj.exists()) {
 				csvWriter.append("Link");
 				csvWriter.append("\n");
 			}

@@ -1,4 +1,4 @@
-package com.core.product;
+package com.core.product.steps;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -14,6 +14,7 @@ import io.cucumber.java.en.When;
 
 public class CPSteps {
 	
+		
 	WebDriver driver = Hooks.getDriver();
 	CPHomePage homePage = new CPHomePage(driver);
 	CPNewsAndFeaturesPage cpNewsAndFeaturesPage = new CPNewsAndFeaturesPage(driver);;
@@ -23,9 +24,9 @@ public class CPSteps {
 	public void homePage() {
 		homePage.navigateAppHomePage();
 		 // Assert that the page title contains a specific string
-//		String expectedTitlePart = "Bulls - The official site of the NBA for the latest NBA Scores";
-//        String actualTitle = homePage.getPageTitle();;
-//        Assert.assertTrue(actualTitle.contains(expectedTitlePart), "Page title does not contain expected text.");
+		String expectedTitlePart = "Home | Golden State Warriors";
+        String actualTitle = homePage.getPageTitle();;
+        Assert.assertTrue(actualTitle.contains(expectedTitlePart), "Page title does not contain expected text.");
 	}
 	
 	
@@ -47,7 +48,6 @@ public class CPSteps {
 	@When("User select product from available options")
 	public void selectProductFromAllOptions() {
 		cpMensShopPage.findProductInSearch();
-//		cpMensShopPage.selectProductFromAvailableOptions();
 	}
 	
 	@Then("User captures all product details")

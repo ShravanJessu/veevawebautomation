@@ -1,8 +1,10 @@
 package com.automation.framework.utils;
 
 import java.time.Duration;
+import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -29,6 +31,18 @@ public class CommonUtils {
 			System.out.println(e.getMessage());
 		}
 		return element;
+	}
+	
+	public void clickOnElement(WebElement element) {
+		try {
+			if (element.isDisplayed()) {
+				element.click();
+			}	
+		} catch (Exception e) {
+			System.out.println("some exception got occurred while clicking on the webelement : " + element);
+			System.out.println(e.getMessage());
+		}
+			
 	}
 	
 	public void doClick(By locator) {
@@ -128,5 +142,51 @@ public class CommonUtils {
 	
 	public void waitForElementPresent(By locator){
 		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+	}
+
+	public void switchToChildWindow() {
+		Log4j2Util.info("Performing Switching to Child Window Tab..");
+		String originalWindow = driver.getWindowHandle();
+		Set<String> allWindows = driver.getWindowHandles();
+		Log4j2Util.info("Parent Window Tab Id: "+ originalWindow);
+		Log4j2Util.info("Available Window Tab Ids: "+allWindows);
+		for (String windowHandle : allWindows) {
+			if (!windowHandle.equals(originalWindow)) {
+				driver.switchTo().window(windowHandle);
+				Log4j2Util.info("Successfully Switched to Child Window Tab..");
+				break;
+			}
+		}		
+	}
+
+	public boolean isPageLoadComplete() {
+		boolean flag = false;
+		if (((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete")) {
+			flag = true;
+			return flag;
+		} else {
+			return flag;
+		}
+	}
+
+	public void moveToElement(WebElement element) {
+		new Actions(driver).moveToElement(element).perform();		
+	}
+
+	public void jseClick(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", element);
+	}
+
+	public String getPageTitle() {
+		return driver.getTitle();
+	}
+
+	public void jseScroll(WebElement element) {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+
+	public void navigateToApp(String appUrl) {
+		driver.get(appUrl);
 	}
 }

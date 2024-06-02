@@ -5,3 +5,5 @@
 /.project
 /.classpath
 /logs/
+
+src\test\resources\data\

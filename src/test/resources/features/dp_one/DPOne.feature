@@ -6,3 +6,4 @@ Background:
 
   Scenario: Get the list of available items
     When User captures count of avaiables sildes from Tickets Menu
+    And User captures each slide and validates data

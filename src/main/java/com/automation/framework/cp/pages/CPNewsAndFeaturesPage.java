@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.automation.framework.utils.CommonUtils;
 import com.automation.framework.utils.Log4j2Util;
 
 public class CPNewsAndFeaturesPage {
@@ -22,9 +23,11 @@ public class CPNewsAndFeaturesPage {
 	List<WebElement> spanElementList;
 
 	WebDriver driver;
+	CommonUtils commonUtils;
 
 	public CPNewsAndFeaturesPage(WebDriver driver) {
 		this.driver = driver;
+		commonUtils = new CommonUtils(driver);
 		PageFactory.initElements(driver, this);
 	}
 
@@ -41,14 +44,14 @@ public class CPNewsAndFeaturesPage {
 			return;
 		}
 
-		System.out.println("Total feedElementList - " + feedElementList.size());
+		Log4j2Util.info("Total feedElementList - " + feedElementList.size());
 		int counter = 0;
 		for (WebElement webElement : spanElementList) {
 			if (webElement.getText().equals("1d") || webElement.getText().equals("2d")) {
 				counter++;
 			}
 		}
-		System.out.println("Greater Than 3d Feed Count Details: " + (feedElementList.size() - counter));
+		Log4j2Util.info("Greater Than 3d Feed Count Details: " + (feedElementList.size() - counter));
 	}
 
 }

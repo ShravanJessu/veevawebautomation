@@ -8,5 +8,5 @@ import io.cucumber.testng.CucumberOptions;
         glue = {"com.derived.product2","common"},
         plugin = {"pretty", "html:target/cucumber-reports.html"}
 )
-public class TestRunner_DPTwo extends AbstractTestNGCucumberTests {
+public class TestRunner extends AbstractTestNGCucumberTests {
 }

@@ -1,4 +1,4 @@
-package com.derived.product2;
+package com.derived.product2.steps;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;

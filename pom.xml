@@ -13,9 +13,11 @@
 		<testng.version>7.4.0</testng.version>
 		<log4j2.version>2.22.0</log4j2.version>
 		<java.version>11</java.version>
+		<poi.version>5.2.4</poi.version>
 		<cucumber.version>7.9.0</cucumber.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
+
 	</properties>
 
 	<build>
@@ -42,17 +44,20 @@
 				</executions>
 			</plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-            
+			<!-- Maven Surefire Plugin configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+					<suiteXmlFiles>
+						<suiteXmlFile>testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>net.masterthought</groupId>
 				<artifactId>maven-cucumber-reporting</artifactId>
@@ -72,12 +77,32 @@
 							</jsonFiles>
 							<outputDirectory>
 								target/cucumber-reports/advanced-reports</outputDirectory>
+							<checkBuildResult>false</checkBuildResult>	
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 
-			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>
+						com.automation.framework.utils.TestNGFileUtil</mainClass>
+					<arguments>
+						<argument>${browser}</argument>
+						<argument>${runnerClass}</argument>
+					</arguments>
+				</configuration>
+			</plugin>
 		</plugins>
 
 		<resources>
@@ -122,7 +147,7 @@
 			<version>${log4j2.version}</version>
 		</dependency>
 
-		
+
 		<!-- Cucumber dependencies -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -136,12 +161,19 @@
 			<version>${cucumber.version}</version>
 		</dependency>
 
-		<!-- ExtentReports dependency -->
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<dependency>
-			<groupId>com.aventstack</groupId>
-			<artifactId>extentreports</artifactId>
-			<version>5.0.9</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
 		</dependency>
-		
+
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+
 	</dependencies>
 </project>
